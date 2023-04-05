@@ -1,4 +1,4 @@
-package com.healthbest.api.domain;
+package com.healthbest.api.auth.domain;
 
 import com.healthbest.api.common.BaseTimeEntity;
 import com.healthbest.api.domain.vo.Gender;

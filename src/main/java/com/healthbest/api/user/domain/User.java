@@ -1,20 +1,28 @@
-package com.healthbest.api.auth.domain;
+package com.healthbest.api.user.domain;
 
 import com.healthbest.api.common.BaseTimeEntity;
-import com.healthbest.api.domain.vo.Gender;
+import com.healthbest.api.user.domain.vo.Authority;
+import com.healthbest.api.user.domain.vo.Gender;
 import jakarta.persistence.*;
+import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
 @NoArgsConstructor
+@Table(name = "user")
+@Getter
 public class User extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String email;
+    private String loginId;
 
     private String password;
+
+    @Enumerated(value = EnumType.STRING)
+    private Authority authority;
 
     private String nickName;
 
@@ -26,4 +34,15 @@ public class User extends BaseTimeEntity {
     private int height;
 
     private int weight;
+
+    @Builder
+    public User(String loginId, String password, String nickName, Gender gender, int age, int height, int weight) {
+        this.loginId = loginId;
+        this.password = password;
+        this.nickName = nickName;
+        this.gender = gender;
+        this.age = age;
+        this.height = height;
+        this.weight = weight;
+    }
 }

@@ -1,4 +1,4 @@
-package com.healthbest.api.domain.vo;
+package com.healthbest.api.user.domain.vo;
 
 public enum Gender {
     FEMALE,

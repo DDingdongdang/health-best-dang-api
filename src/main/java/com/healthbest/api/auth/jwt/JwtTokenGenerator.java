@@ -7,32 +7,32 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import java.util.Base64;
 import java.util.Date;
 
 
 @Slf4j
 @Component
 public class JwtTokenGenerator {
-    private static final String BEARER_TYPE = "Bearer";
-    private final long expiredTime;
+
+    private final Long expiredTime;
     private final String secreteKey;
 
     public JwtTokenGenerator(@Value("${jwt.secret}") String secreteKey,
-                             @Value("${jwt.expired-time") long expiredTime) {
+                             @Value("${jwt.expire-time}") Long expiredTime) {
         this.expiredTime = expiredTime;
         this.secreteKey = secreteKey;
     }
 
     public String generateToken(String loginId) {
 
+        long expiredTimeMilli = expiredTime * 1000L;
         Date now = new Date();
         Claims claims = Jwts.claims().setSubject(loginId);
 
         return Jwts.builder()
                 .setClaims(claims)
                 .setIssuedAt(now)
-                .setExpiration(new Date(now.getTime() + expiredTime))
+                .setExpiration(new Date(now.getTime() + expiredTimeMilli))
                 .signWith(SignatureAlgorithm.HS512, secreteKey)
                 .compact();
     }

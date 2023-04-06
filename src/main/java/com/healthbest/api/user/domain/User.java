@@ -3,6 +3,7 @@ package com.healthbest.api.user.domain;
 import com.healthbest.api.common.BaseTimeEntity;
 import com.healthbest.api.user.domain.vo.Authority;
 import com.healthbest.api.user.domain.vo.Gender;
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -29,16 +30,20 @@ public class User extends BaseTimeEntity {
     @Enumerated(value = EnumType.STRING)
     private Gender gender;
 
+    @Column(nullable = false)
     private int age;
 
+    @Column(nullable = false)
     private int height;
 
+    @Column(nullable = false)
     private int weight;
 
     @Builder
     public User(String loginId, String password, String nickName, Gender gender, int age, int height, int weight) {
         this.loginId = loginId;
         this.password = password;
+        this.authority = Authority.ROLE_USER;
         this.nickName = nickName;
         this.gender = gender;
         this.age = age;

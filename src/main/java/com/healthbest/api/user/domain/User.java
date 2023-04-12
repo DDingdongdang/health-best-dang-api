@@ -1,9 +1,8 @@
 package com.healthbest.api.user.domain;
 
-import com.healthbest.api.common.BaseTimeEntity;
+import com.healthbest.api.common.domain.BaseTimeEntity;
 import com.healthbest.api.user.domain.vo.Authority;
 import com.healthbest.api.user.domain.vo.Gender;
-import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;

@@ -1,4 +1,4 @@
-package com.healthbest.api.bloodSugar;
+package com.healthbest.api.bloodSugar.domain;
 
 import com.healthbest.api.user.domain.User;
 import jakarta.persistence.*;

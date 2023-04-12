@@ -1,4 +1,4 @@
-package com.healthbest.api.common;
+package com.healthbest.api.common.domain;
 
 import jakarta.persistence.MappedSuperclass;
 import org.springframework.data.annotation.CreatedDate;

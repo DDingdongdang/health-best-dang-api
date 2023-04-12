@@ -1,5 +1,6 @@
-package com.healthbest.api.domain;
+package com.healthbest.api.bloodSugar.domain;
 
+import com.healthbest.api.user.domain.User;
 import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
 

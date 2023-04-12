@@ -21,7 +21,7 @@ public class JwtAuthenticationProvider implements AuthenticationProvider {
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         UserAdapter userDetails = (UserAdapter) userDetailsService.loadUserByUsername(authentication.getPrincipal().toString());
-        return new UsernamePasswordAuthenticationToken(userDetails.getUser(), null, null);
+        return new UsernamePasswordAuthenticationToken(userDetails.getUser(), null, userDetails.getAuthorities());
     }
 
     @Override

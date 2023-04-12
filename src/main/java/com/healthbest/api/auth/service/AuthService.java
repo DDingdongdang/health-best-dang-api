@@ -3,14 +3,17 @@ package com.healthbest.api.auth.service;
 import com.healthbest.api.auth.dto.AuthRequest;
 import com.healthbest.api.auth.jwt.JwtTokenGenerator;
 import com.healthbest.api.user.domain.User;
-import com.healthbest.api.user.domain.vo.Gender;
 import com.healthbest.api.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 import static com.healthbest.api.auth.dto.AuthResponse.*;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class AuthService {
@@ -20,6 +23,11 @@ public class AuthService {
 
     @Transactional
     public SignUp signUp(AuthRequest.SignUp request) {
+        userRepository.findByLoginId(request.getLoginId())
+                .ifPresent(user -> {
+                    throw new RuntimeException("이미 존재하는 ID 입니다.");
+                });
+
         User user = userRepository.save(new User(
                 request.getLoginId(),
                 request.getPassword(),
@@ -44,6 +52,7 @@ public class AuthService {
 
         String token = jwtTokenGenerator.generateToken(request.getLoginId());
 
+        log.info("token : {}", token);
         return new SignIn(user.getId(), token);
     }
 }

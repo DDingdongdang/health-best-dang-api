@@ -1,6 +1,5 @@
 package com.healthbest.api.auth.security.config;
 
-import com.healthbest.api.auth.jwt.JwtAuthenticationProvider;
 import com.healthbest.api.auth.jwt.JwtTokenExtractor;
 import com.healthbest.api.auth.jwt.JwtTokenValidator;
 import lombok.RequiredArgsConstructor;
@@ -28,7 +27,9 @@ public class SecurityConfig {
 
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring().requestMatchers("/api/v1/auth/**");
+        return (web) -> web.ignoring()
+                .requestMatchers("/api/v1/auth/**")
+                .requestMatchers("/api/v1/open-api/foods");
     }
 
     @Bean

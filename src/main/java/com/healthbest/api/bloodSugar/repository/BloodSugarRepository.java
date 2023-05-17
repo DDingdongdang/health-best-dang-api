@@ -11,7 +11,9 @@ import java.util.List;
 
 public interface BloodSugarRepository extends JpaRepository<BloodSugar, Long> {
 
-    @Query("select b from BloodSugar b where b.user = :user and b.date between :startedTime and :endTime order by b.date")
+    @Query("select b from BloodSugar b " +
+            "where b.user = :user " +
+            "and b.date between :startedTime and :endTime order by b.date")
     List<BloodSugar> findBloodSugarByDate(
             @Param("user") User user,
             @Param("startedTime") LocalDateTime startedTime,

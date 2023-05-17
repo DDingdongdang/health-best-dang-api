@@ -8,8 +8,13 @@ spring:
   jpa:
     show-sql: true
     hibernate:
-      ddl-auto: create
+      ddl-auto: validate
 
 jwt:
   secret: testsetestsetsetsetsetst!!!
   expire-time: 9999999
+
+open-api:
+  base-url: ${OPEN_API_BASE_URL}
+  service-id: ${OPEN_API_SERVICE_ID}
+  key: ${OPEN_API_KEY}

@@ -1,6 +1,8 @@
 package com.healthbest.api.food.service;
 
 import com.healthbest.api.food.domain.Food;
+import com.healthbest.api.food.dto.FoodGetRequest;
+import com.healthbest.api.food.dto.FoodGetResponse;
 import com.healthbest.api.food.dto.FoodInfo;
 import com.healthbest.api.food.repository.FoodRepository;
 import lombok.RequiredArgsConstructor;
@@ -30,5 +32,12 @@ public class FoodService {
                 .sugars(info.getSugars())
                 .sodium(info.getSodium())
                 .build();
+    }
+
+    @Transactional(readOnly = true)
+    public FoodGetResponse get(FoodGetRequest request) {
+        Food food = foodRepository.findByName(request.getName())
+                .orElseThrow(() -> new RuntimeException("해당 음식에 대한 영양 정보가 존재하지 않습니다."));
+        return FoodGetResponse.generate(food);
     }
 }

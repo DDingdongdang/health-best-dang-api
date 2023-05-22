@@ -17,11 +17,11 @@ public class BloodSugarController {
 
     private final BloodSugarService bloodSugarService;
 
-    @GetMapping("/test")
-    public String test(@AuthenticationPrincipal User user) {
-        log.info("user : {}", user.getId());
-        return user.getId() + " " + user.getLoginId() + " " + user.getPassword() + " " + user.getNickName();
-    }
+//    @GetMapping("/test")
+//    public String test(@AuthenticationPrincipal User user) {
+//        log.info("user : {}", user.getId());
+//        return user.getId() + " " + user.getLoginId() + " " + user.getPassword() + " " + user.getNickName();
+//    }
 
     // TODO: ResponseEntity<> 로 변경
     @PostMapping("/sugars")

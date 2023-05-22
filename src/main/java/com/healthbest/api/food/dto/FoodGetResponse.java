@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class FoodGetResponse {
+    private long id;
+
     private String name;
 
     private int amount;
@@ -27,6 +29,7 @@ public class FoodGetResponse {
 
     public static FoodGetResponse generate(Food food) {
         return new FoodGetResponse(
+                food.getId(),
                 food.getName(),
                 food.getAmount(),
                 food.getCalorie(),

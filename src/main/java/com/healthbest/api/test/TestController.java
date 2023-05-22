@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1")
 public class TestController {
 
-    @GetMapping("/test")
-    public String test() {
-        return "test 성공";
+    @GetMapping("/test2")
+    public TestResponseDto test() {
+        return new TestResponseDto(1L, "축하축하", "성공이다!!!!!!!!!!!!!!!");
     }
 }

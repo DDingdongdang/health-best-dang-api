@@ -29,7 +29,8 @@ public class SecurityConfig {
     public WebSecurityCustomizer webSecurityCustomizer() {
         return (web) -> web.ignoring()
                 .requestMatchers("/api/v1/auth/**")
-                .requestMatchers("/api/v1/foods/**");
+                .requestMatchers("/api/v1/foods/**")
+                .requestMatchers("/api/v1/test2");
     }
 
     @Bean

@@ -2,6 +2,7 @@ package com.healthbest.api.bloodSugar.domain;
 
 import com.healthbest.api.bloodSugar.domain.vo.MealTime;
 import com.healthbest.api.bloodSugar.domain.vo.MealType;
+import com.healthbest.api.common.domain.BaseTimeEntity;
 import com.healthbest.api.user.domain.User;
 import jakarta.persistence.*;
 import lombok.Builder;
@@ -14,7 +15,7 @@ import java.time.LocalDateTime;
 @Entity
 @NoArgsConstructor
 @Table(name = "blood_sugar")
-public class BloodSugar {
+public class BloodSugar extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

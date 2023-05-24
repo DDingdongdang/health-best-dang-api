@@ -37,7 +37,8 @@ public class JwtFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        String token = request.getHeader(AUTHORIZATION_HEADER);
+        String header = request.getHeader(AUTHORIZATION_HEADER);
+        String token = getTokenFromHeader(header);
 
         log.info("token : {}", token);
         log.info("key : {}", secretKey);
@@ -61,5 +62,13 @@ public class JwtFilter extends OncePerRequestFilter {
         log.info("Security Context에 '{}' 인증 정보를 저장했습니다", authentication.getName());
 
         filterChain.doFilter(request, response);
+    }
+
+    private String getTokenFromHeader(String header) {
+        String[] token = header.split(" ");
+        if (token.length != 2 || !token[0].equals("Bearer")) {
+            throw new RuntimeException("잘못된 형식의 Authorization 헤더입니다.");
+        }
+        return token[1];
     }
 }

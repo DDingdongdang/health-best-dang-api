@@ -35,8 +35,9 @@ public class Diet extends BaseTimeEntity {
     @JoinColumn(name = "food_id")
     private Food food;
 
-    public Diet(int amount, LocalDateTime date, User user, Food food) {
+    public Diet(int amount, LocalDateTime date, MealType mealType, User user, Food food) {
         this.amount = amount;
+        this.mealType = mealType;
         this.date = date;
         this.user = user;
         this.food = food;

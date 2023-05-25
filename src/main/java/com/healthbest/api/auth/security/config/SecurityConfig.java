@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -30,7 +31,12 @@ public class SecurityConfig {
         return (web) -> web.ignoring()
                 .requestMatchers("/api/v1/auth/**")
                 .requestMatchers("/api/v1/foods/**")
-                .requestMatchers("/api/v1/test2");
+                .requestMatchers("/api/v1/test2")
+                .requestMatchers("/swagger")
+                .requestMatchers("/api-docs/**")
+                .requestMatchers("/swagger-ui/**")
+                .requestMatchers("/v3/api-docs/**")
+                ;
     }
 
     @Bean

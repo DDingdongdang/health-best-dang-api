@@ -25,8 +25,8 @@ public class BloodSugarResponse {
     @Getter
     @AllArgsConstructor
     public static class BloodSugarInfo {
-        private MealType mealType;
-        private MealTime mealTime;
+        private String mealType;
+        private String mealTime;
         private LocalDateTime date;
         private int sugar;
     }

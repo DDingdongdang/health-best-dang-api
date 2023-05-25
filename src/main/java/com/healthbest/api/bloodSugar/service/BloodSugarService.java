@@ -25,7 +25,7 @@ public class BloodSugarService {
 
     @Transactional
     public Create create(User user, BloodSugarRequest.Create request) {
-        LocalDateTime date = toLocalDateTime(request.getTime());
+        LocalDateTime date = TimeUtil.toLocalDateTime(request.getTime());
         BloodSugar bloodSugar = bloodSugarRepository.save(BloodSugar.builder()
                 .date(date)
                 .sugar(request.getSugar())
@@ -36,15 +36,6 @@ public class BloodSugarService {
         );
 
         return new Create(bloodSugar.getId());
-    }
-
-    private LocalDateTime toLocalDateTime(TimeDto.DateTime timeDto) {
-        LocalDateTime date = TimeUtil.toLocalDateTime(timeDto);
-
-        if (date.isAfter(LocalDateTime.now())) {
-            throw new RuntimeException("현재 시간보다 미래의 시간 입니다.");
-        }
-        return date;
     }
 
     @Transactional(readOnly = true)
@@ -64,8 +55,8 @@ public class BloodSugarService {
 
     private BloodSugarInfo toDto(BloodSugar bloodSugar) {
         return new BloodSugarInfo(
-                bloodSugar.getMealType(),
-                bloodSugar.getMealTime(),
+                bloodSugar.getMealType().name(),
+                bloodSugar.getMealTime().name(),
                 bloodSugar.getDate(),
                 bloodSugar.getSugar()
         );

@@ -1,47 +1,45 @@
-package com.healthbest.api.bloodSugar.domain;
+package com.healthbest.api.diet.domain;
 
-import com.healthbest.api.bloodSugar.domain.vo.MealTime;
 import com.healthbest.api.bloodSugar.domain.vo.MealType;
 import com.healthbest.api.common.domain.BaseTimeEntity;
+import com.healthbest.api.food.domain.Food;
 import com.healthbest.api.user.domain.User;
 import jakarta.persistence.*;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
-@Getter
 @Entity
+@Getter
 @NoArgsConstructor
-@Table(name = "blood_sugar")
-public class BloodSugar extends BaseTimeEntity {
+@Table(name = "diet")
+public class Diet extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private int amount;
+
     @Column(nullable = false)
     private LocalDateTime date;
 
-    @Column(nullable = false)
-    private int sugar;
-
     @Enumerated(value = EnumType.STRING)
     private MealType mealType;
-
-    @Enumerated(value = EnumType.STRING)
-    private MealTime mealTime;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 
-    @Builder
-    public BloodSugar(LocalDateTime date, int sugar, MealType mealType, MealTime mealTime, User user) {
-        this.date = date;
-        this.sugar = sugar;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "food_id")
+    private Food food;
+
+    public Diet(int amount, LocalDateTime date, MealType mealType, User user, Food food) {
+        this.amount = amount;
         this.mealType = mealType;
-        this.mealTime = mealTime;
+        this.date = date;
         this.user = user;
+        this.food = food;
     }
 }

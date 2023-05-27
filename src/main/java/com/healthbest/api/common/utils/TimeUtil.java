@@ -25,7 +25,7 @@ public class TimeUtil {
                 dto.getMonth(),
                 dto.getDay(),
                 dto.getHour(),
-                dto.getMinuit()
+                dto.getMinute()
         );
     }
 

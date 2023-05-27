@@ -14,7 +14,7 @@ public class TimeDto {
         private int month;
         private int day;
         private int hour;
-        private int minuit;
+        private int minute;
     }
 
     @Getter

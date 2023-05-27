@@ -32,7 +32,6 @@ public class TimeUtil {
     public static LocalDateTime startedTime(TimeDto.Date dto) {
         return LocalDateTime.of(
                 dto.getYear(), dto.getMonth(), dto.getDay(), 0, 0);
-//        return date.format(FORMATTER);
     }
 
     public static LocalDateTime endTime(TimeDto.Date dto) {

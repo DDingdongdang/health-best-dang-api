@@ -17,7 +17,6 @@ public class BloodSugarController {
 
     private final BloodSugarService bloodSugarService;
 
-    // TODO: ResponseEntity<> 로 변경
     @PostMapping("/sugars")
     public BloodSugarResponse.Create create(
             @AuthenticationPrincipal User user,
@@ -30,9 +29,11 @@ public class BloodSugarController {
     @GetMapping("/sugars")
     public BloodSugarResponse.BloodSugarInfos findByDate(
             @AuthenticationPrincipal User user,
-            @RequestBody BloodSugarRequest.Find request
+            @RequestParam int year,
+            @RequestParam int month,
+            @RequestParam int day
     ) {
-        BloodSugarResponse.BloodSugarInfos response = bloodSugarService.findByDate(user, request);
+        BloodSugarResponse.BloodSugarInfos response = bloodSugarService.findByDate(user, year, month, day);
         return response;
     }
 }

@@ -39,11 +39,9 @@ public class BloodSugarService {
     }
 
     @Transactional(readOnly = true)
-    public BloodSugarInfos findByDate(User user, BloodSugarRequest.Find request) {
-        LocalDateTime startedTime = TimeUtil.startedTime(request.getDate());
-        LocalDateTime endTime = TimeUtil.endTime(request.getDate());
-        log.info("startedTime : {}", startedTime);
-        log.info("endTime : {}", endTime);
+    public BloodSugarInfos findByDate(User user, int year, int month, int day) {
+        LocalDateTime startedTime = TimeUtil.startedTime(new TimeDto.Date(year, month, day));
+        LocalDateTime endTime = TimeUtil.endTime(new TimeDto.Date(year, month, day));
 
         List<BloodSugarInfo> infos = bloodSugarRepository.findBloodSugarByDate(user, startedTime, endTime)
                 .stream()

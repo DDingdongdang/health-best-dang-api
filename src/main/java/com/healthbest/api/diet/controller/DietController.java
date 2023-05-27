@@ -27,9 +27,11 @@ public class DietController {
     @GetMapping("/diets")
     public ResponseEntity<DietResponse.Get> findByDate(
             @AuthenticationPrincipal User user,
-            @RequestBody DietRequest.Get request
+            @RequestParam int year,
+            @RequestParam int month,
+            @RequestParam int day
     ) {
-        DietResponse.Get response = dietService.get(request, user);
+        DietResponse.Get response = dietService.get(year, month, day, user);
         return ResponseEntity.ok(response);
     }
 }

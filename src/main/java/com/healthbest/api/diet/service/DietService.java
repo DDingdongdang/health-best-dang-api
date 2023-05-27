@@ -2,6 +2,7 @@ package com.healthbest.api.diet.service;
 
 import com.healthbest.api.bloodSugar.domain.BloodSugar;
 import com.healthbest.api.bloodSugar.dto.BloodSugarResponse;
+import com.healthbest.api.common.dto.TimeDto;
 import com.healthbest.api.common.utils.TimeUtil;
 import com.healthbest.api.diet.domain.Diet;
 import com.healthbest.api.diet.dto.DietRequest;
@@ -40,9 +41,9 @@ public class DietService {
     }
 
     @Transactional(readOnly = true)
-    public DietResponse.Get get(DietRequest.Get request, User user) {
-        LocalDateTime startedTime = TimeUtil.startedTime(request.getDate());
-        LocalDateTime endTime = TimeUtil.endTime(request.getDate());
+    public DietResponse.Get get(int year, int month, int day, User user) {
+        LocalDateTime startedTime = TimeUtil.startedTime(new TimeDto.Date(year, month, day));
+        LocalDateTime endTime = TimeUtil.endTime(new TimeDto.Date(year, month, day));
 
         List<DietResponse.GetInfo> infos = dietRepository.findDietByDate(user, startedTime, endTime)
                 .stream()
